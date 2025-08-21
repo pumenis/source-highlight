@@ -38,7 +38,7 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 
 	// Start span with metadata and ID
 	htmlParts = append(htmlParts, fmt.Sprintf(
-		`<span id="%s" class="%s" type="%s" is_named="%s">`,
+		`<span id="h-%s" class="%s" type="%s" is_named="%s">`,
 		id, class, node.Type(), isNamed))
 
 	if node.ChildCount() != 0 && node.StartByte() < node.Child(0).StartByte() {
