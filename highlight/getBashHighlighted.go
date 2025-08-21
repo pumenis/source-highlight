@@ -1,10 +1,12 @@
 package highlight
 
 import (
+	"context"
+	"fmt"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	bash "github.com/smacker/go-tree-sitter/bash"
+	"github.com/smacker/go-tree-sitter/bash"
 )
 
 func GetBashHighlighted(sourceCode string) string {
@@ -14,7 +16,10 @@ func GetBashHighlighted(sourceCode string) string {
 	defer parser.Close()
 	parser.SetLanguage(bash.GetLanguage())
 
-	tree := parser.Parse(nil, code)
+	tree, err := parser.ParseCtx(context.Background(), nil, code)
+	if err != nil {
+		fmt.Println("error parsing the tree")
+	}
 	defer tree.Close()
 
 	htmlParts := populateSliceWithNodeData(tree.RootNode(), code)

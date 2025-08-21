@@ -1,0 +1,89 @@
+.highlighted {
+  background-color: #2d3f76;
+}
+
+:root {
+  background-color: #2b2e33;
+  color: #a5a8b3;
+  font-size: 1rem;
+}
+
+pre {
+  font-family: monospace;
+  overflow-y: auto;
+  background-color: #1a1d23;
+  tab-size: 4;
+}
+
+pre .identifier {
+  color: #adb0bb;
+}
+
+pre [type="&&"],
+pre [type="||"],
+pre [type="<"],
+pre [type=">"],
+pre [type="</"],
+pre [type="/>"],
+pre [type="+"],
+pre [type="-"],
+pre [type="*"],
+pre [type="/"],
+pre [type="!"],
+pre [type="?"],
+pre [type="."],
+pre [type="="] {
+  color: #89ddff;
+}
+
+pre [type="("],
+pre [type=")"],
+pre [type="{"],
+pre [type="}"],
+pre [type="["],
+pre [type="]"] {
+  color: #a5a8b3;
+}
+
+pre .int_literal,
+pre .true,
+pre .false {
+  color: #ff966c;
+}
+
+pre .if,
+pre .for,
+pre .do,
+pre .return,
+pre .switch,
+pre .defer,
+pre .func,
+pre .selector_expression > .identifier,
+pre .import_declaration .import,
+pre .package_identifier,
+pre .package_clause {
+  color: #d693e9;
+}
+
+pre .raw_string_literal,
+pre .interpreted_string_literal {
+  color: #87c05f;
+}
+
+pre .type_identifier {
+  color: #dfab25;
+}
+
+pre .parameter_declaration .identifier {
+  color: #ef9539;
+}
+
+pre .function_declaration > .identifier,
+pre .call_expression > .identifier,
+pre .selector_expression .field_identifier {
+  color: #5eb7ff;
+}
+
+pre .nil {
+  color: #4ac2b8;
+}

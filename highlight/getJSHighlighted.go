@@ -1,6 +1,8 @@
 package highlight
 
 import (
+	"context"
+	"fmt"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
@@ -14,7 +16,10 @@ func GetJSHighlighted(sourceCode string) string {
 	defer parser.Close()
 	parser.SetLanguage(javascript.GetLanguage())
 
-	tree := parser.Parse(nil, code)
+	tree, err := parser.ParseCtx(context.Background(), nil, code)
+	if err != nil {
+		fmt.Println("cannot parse code")
+	}
 	defer tree.Close()
 
 	htmlParts := populateSliceWithNodeData(tree.RootNode(), code)

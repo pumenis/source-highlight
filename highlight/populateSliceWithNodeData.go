@@ -11,7 +11,7 @@ import (
 func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	htmlParts := []string{}
 	if node.Parent() == nil && node.StartByte() > 0 {
-		htmlParts = append(htmlParts, string(code[0:node.StartByte()]))
+		htmlParts = append(htmlParts, html.EscapeString(string(code[0:node.StartByte()])))
 	}
 
 	matchUnderscoreLowerLettersRe, err := regexp.Compile(`^[a-z_]+$`)
@@ -33,23 +33,24 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 		class, node.Type(), isNamed))
 
 	if node.ChildCount() != 0 && node.StartByte() < node.Child(0).StartByte() {
-		htmlParts = append(htmlParts, string(code[node.StartByte():node.Child(0).StartByte()]))
+		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
 	}
 
 	if node.ChildCount() == 0 {
 		htmlParts = append(htmlParts, html.EscapeString(node.Content(code)))
 	}
 
-	for i := uint(0); i < node.ChildCount(); i++ {
-		if node.ChildCount() > 1 && i > 0 && node.Child(i).StartByte() > node.Child(i-1).EndByte() {
-			htmlParts = append(htmlParts, string(code[node.Child(i-1).EndByte():node.Child(i).StartByte()]))
+	for i := uint32(0); i < node.ChildCount(); i++ {
+		intI := int(i)
+		if node.ChildCount() > 1 && i > 0 && node.Child(intI).StartByte() > node.Child(intI-1).EndByte() {
+			htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(intI-1).EndByte():node.Child(intI).StartByte()])))
 		}
 
-		htmlParts = append(htmlParts, populateSliceWithNodeData(node.Child(i), code)...)
+		htmlParts = append(htmlParts, populateSliceWithNodeData(node.Child(intI), code)...)
 	}
 
-	if node.ChildCount() != 0 && node.EndByte() > node.Child(node.ChildCount()-1).EndByte() {
-		htmlParts = append(htmlParts, string(code[node.Child(node.ChildCount()-1).EndByte():node.EndByte()]))
+	if node.ChildCount() != 0 && node.EndByte() > node.Child(int(node.ChildCount()-1)).EndByte() {
+		htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(int(node.ChildCount()-1)).EndByte():node.EndByte()])))
 	}
 
 	htmlParts = append(htmlParts, "</span>")

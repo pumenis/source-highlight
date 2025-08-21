@@ -1,0 +1,133 @@
+.highlighted {
+  background-color: #2d3f76;
+}
+
+:root {
+  background-color: #2b2e33;
+  color: #7882b7;
+  font-size: 1rem;
+}
+
+pre {
+  font-family: monospace;
+  overflow-y: auto;
+  background-color: #1a1d23;
+  tab-size: 4;
+}
+
+pre .document {
+}
+
+pre .doctype > [type=">"],
+pre .doctype {
+  color: #ff966c;
+}
+
+pre .tag_name {
+  color: #c099ff;
+}
+
+pre .attribute_name {
+  color: #4fd6be;
+}
+
+pre .quoted_attribute_value :not(.program *),
+pre .quoted_attribute_value:not(:has(.program)) {
+  color: #c3e88d;
+}
+
+pre .program {
+  color: #86e1fc;
+}
+
+pre .let,
+pre .const,
+pre .var,
+pre .return {
+  color: #fca7ea;
+}
+
+pre .text,
+pre .identifier,
+pre .member_expression > .identifier,
+pre .variable_declarator > .identifier {
+  color: #c8d3f5;
+}
+
+pre .template_substitution [type="${"],
+pre .template_substitution [type="}"],
+pre [type="=>"],
+pre [type="&&"],
+pre [type="||"],
+pre [type="<"],
+pre [type=">"],
+pre [type="</"],
+pre [type="/>"],
+pre [type="+"],
+pre [type="-"],
+pre [type="*"],
+pre [type="/"],
+pre [type="!"],
+pre [type="?"],
+pre [type="."],
+pre [type="="] {
+  color: #89ddff;
+}
+
+pre [type="("],
+pre [type=")"],
+pre [type="{"],
+pre [type="}"],
+pre [type="["],
+pre [type="]"] {
+  color: #7882b7;
+}
+
+pre .string_fragment,
+pre .string {
+  color: #bfe38a;
+}
+
+pre .number,
+pre .true,
+pre .false {
+  color: #ff966c;
+}
+
+pre .function_declaration > .identifier,
+pre .call_expression > .member_expression > :last-child,
+pre .call_expression > .identifier,
+pre .CallExpression .MemberExpression:has(+ [label="("]) :last-child {
+  color: #82aaff;
+}
+
+pre .MemberExpression:has(+ [label="["]) :last-child :first-child,
+pre
+  .call_expression
+  > .member_expression
+  > .property_identifier:not(:last-child),
+pre .property_identifier {
+  color: #4fd6be;
+}
+
+pre .if,
+pre .for,
+pre .do,
+pre .while,
+pre .switch,
+pre .function {
+  color: #c099ff;
+}
+pre .import,
+pre .from,
+pre .new {
+  color: #86e1fc;
+}
+
+pre .import_clause .identifier {
+  color: #65bcff;
+}
+
+pre .formal_parameters .identifier {
+  color: #f18f68;
+}

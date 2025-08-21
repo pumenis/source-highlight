@@ -1,10 +1,14 @@
+// Package highlight provides syntax highlighting
+// for Go, HTML, JS, Bash source codes using tree-sitter.
 package highlight
 
 import (
+	"context"
+	"fmt"
 	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
-	golang "github.com/smacker/go-tree-sitter/go"
+	"github.com/smacker/go-tree-sitter/golang"
 )
 
 func GetGoHighlighted(sourceCode string) string {
@@ -14,10 +18,12 @@ func GetGoHighlighted(sourceCode string) string {
 	defer parser.Close()
 	parser.SetLanguage(golang.GetLanguage())
 
-	tree := parser.Parse(nil, code)
+	tree, err := parser.ParseCtx(context.Background(), nil, code)
+	if err != nil {
+		fmt.Println("error parsing the code")
+	}
 	defer tree.Close()
 
 	htmlParts := populateSliceWithNodeData(tree.RootNode(), code)
 	return strings.Join(htmlParts, "")
 }
-

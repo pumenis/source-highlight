@@ -1,6 +1,7 @@
 package highlight
 
 import (
+	"context"
 	"fmt"
 	"html"
 	"regexp"
@@ -22,7 +23,7 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 
 	// Handle leading text before root node
 	if node.Parent() == nil && node.StartByte() > 0 {
-		htmlParts = append(htmlParts, string(code[0:node.StartByte()]))
+		htmlParts = append(htmlParts, html.EscapeString(string(code[0:node.StartByte()])))
 	}
 
 	// Determine class name
@@ -42,7 +43,7 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 
 	// Handle text between parent and first child
 	if node.ChildCount() > 0 && node.StartByte() < node.Child(0).StartByte() {
-		htmlParts = append(htmlParts, string(code[node.StartByte():node.Child(0).StartByte()]))
+		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
 	}
 
 	// Leaf node handling
@@ -62,17 +63,16 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 		}
 	}
 
-	// Recursively process children
 	for i := uint32(0); i < node.ChildCount(); i++ {
-		if i > 0 && node.Child(i).StartByte() > node.Child(i-1).EndByte() {
-			htmlParts = append(htmlParts, string(code[node.Child(i-1).EndByte():node.Child(i).StartByte()]))
+		intI := int(i)
+		if i > 0 && node.Child(intI).StartByte() > node.Child(intI-1).EndByte() {
+			htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(intI-1).EndByte():node.Child(intI).StartByte()])))
 		}
-		htmlParts = append(htmlParts, populateHTMLSliceWithNodeData(node.Child(i), code)...)
+		htmlParts = append(htmlParts, populateHTMLSliceWithNodeData(node.Child(intI), code)...)
 	}
 
-	// Handle trailing text after last child
-	if node.ChildCount() > 0 && node.EndByte() > node.Child(node.ChildCount()-1).EndByte() {
-		htmlParts = append(htmlParts, string(code[node.Child(node.ChildCount()-1).EndByte():node.EndByte()]))
+	if node.ChildCount() > 0 && node.EndByte() > node.Child(int(node.ChildCount()-1)).EndByte() {
+		htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(int(node.ChildCount()-1)).EndByte():node.EndByte()])))
 	}
 
 	htmlParts = append(htmlParts, "</span>")
@@ -86,7 +86,10 @@ func GetHTMLHighlighted(sourceCode string) string {
 	defer parser.Close()
 	parser.SetLanguage(htmlLang.GetLanguage())
 
-	tree := parser.Parse(nil, code)
+	tree, err := parser.ParseCtx(context.Background(), nil, code)
+	if err != nil {
+		fmt.Println("cannot parse code")
+	}
 	defer tree.Close()
 
 	htmlParts := populateHTMLSliceWithNodeData(tree.RootNode(), code)
