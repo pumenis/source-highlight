@@ -32,8 +32,7 @@ func main() {
 }
 ```
 
-go run ./examples/highlight_go_file/ highlight/getGoHighlighted.go
-
 ```
+go run ./examples/highlight_go_file/ highlight/getGoHighlighted.go >index.html
 
 ```
