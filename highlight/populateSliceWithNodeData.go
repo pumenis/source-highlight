@@ -1,6 +1,8 @@
 package highlight
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"html"
 	"regexp"
@@ -10,6 +12,7 @@ import (
 
 func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	htmlParts := []string{}
+
 	if node.Parent() == nil && node.StartByte() > 0 {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[0:node.StartByte()])))
 	}
@@ -28,16 +31,22 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	if matchUnderscoreLowerLettersRe.MatchString(node.Type()) {
 		class = node.Type()
 	}
+
+	content := node.Content(code)
+	hash := sha256.Sum256([]byte(content))
+	id := hex.EncodeToString(hash[:])[:12]
+
+	// Start span with metadata and ID
 	htmlParts = append(htmlParts, fmt.Sprintf(
-		`<span class="%s" type="%s" is_named="%s">`,
-		class, node.Type(), isNamed))
+		`<span id="%s" class="%s" type="%s" is_named="%s">`,
+		id, class, node.Type(), isNamed))
 
 	if node.ChildCount() != 0 && node.StartByte() < node.Child(0).StartByte() {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
 	}
 
 	if node.ChildCount() == 0 {
-		htmlParts = append(htmlParts, html.EscapeString(node.Content(code)))
+		htmlParts = append(htmlParts, html.EscapeString(content))
 	}
 
 	for i := uint32(0); i < node.ChildCount(); i++ {
@@ -45,7 +54,6 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 		if node.ChildCount() > 1 && i > 0 && node.Child(intI).StartByte() > node.Child(intI-1).EndByte() {
 			htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(intI-1).EndByte():node.Child(intI).StartByte()])))
 		}
-
 		htmlParts = append(htmlParts, populateSliceWithNodeData(node.Child(intI), code)...)
 	}
 

@@ -2,6 +2,8 @@ package highlight
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"html"
 	"regexp"
@@ -21,12 +23,10 @@ var (
 func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	var htmlParts []string
 
-	// Handle leading text before root node
 	if node.Parent() == nil && node.StartByte() > 0 {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[0:node.StartByte()])))
 	}
 
-	// Determine class name
 	class := "syntax_node"
 	if matchUnderscoreLowerLetters.MatchString(node.Type()) {
 		class = node.Type()
@@ -37,22 +37,22 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 		isNamed = "true"
 	}
 
-	htmlParts = append(htmlParts, fmt.Sprintf(
-		`<span class="%s" type="%s" is_named="%s">`,
-		class, node.Type(), isNamed))
+	text := node.Content(code)
+	if !utf8.ValidString(text) {
+		text = string(code[node.StartByte():node.EndByte()])
+	}
+	hash := sha256.Sum256([]byte(text))
+	id := hex.EncodeToString(hash[:])[:12] // 12-char hash for brevity
 
-	// Handle text between parent and first child
+	htmlParts = append(htmlParts, fmt.Sprintf(
+		`<span id="%s" class="%s" type="%s" is_named="%s">`,
+		id, class, node.Type(), isNamed))
+
 	if node.ChildCount() > 0 && node.StartByte() < node.Child(0).StartByte() {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
 	}
 
-	// Leaf node handling
 	if node.ChildCount() == 0 {
-		text := node.Content(code)
-		if !utf8.ValidString(text) {
-			text = string(code[node.StartByte():node.EndByte()])
-		}
-
 		if (node.Type() == "raw_text" && node.Parent() != nil && node.Parent().Type() == "script_element") ||
 			(node.Type() == "attribute_value" &&
 				node.Parent() != nil && node.Parent().Parent() != nil &&
