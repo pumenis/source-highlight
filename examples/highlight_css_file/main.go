@@ -1,10 +1,3 @@
-# source-highlight a go module
-
-Golang module for highlighting sources that outputs html
-
-## Usage
-
-```go
 package main
 
 import (
@@ -15,8 +8,8 @@ import (
 	"github.com/pumenis/source-highlight/highlight"
 )
 
-//go:embed gosyntax.css
-var goFile embed.FS
+//go:embed csssyntax.css
+var cssFile embed.FS
 
 func main() {
 	filePath := os.Args[1]
@@ -28,21 +21,15 @@ func main() {
 	}
 	sourceCode := string(content)
 
-	css, err := goFile.ReadFile("gosyntax.css")
+	css, err := cssFile.ReadFile("csssyntax.css")
 	if err != nil {
 		fmt.Printf("Error reading file: %v", err)
 		return
 	}
 
-	result := highlight.GetGoHighlighted(sourceCode)
+	result := highlight.GetCSSHighlighted(sourceCode)
 	fmt.Println(`<!DOCTYPE html>
 	  <html><head>
-	 	<style>` + string(css) + `</style>
+	 	<style>` + string(css) + `</style> 
 		</head><div><pre>` + result + `</pre></div></html>`)
 }
-
-```
-
-```
-go run ./examples/highlight_go_file/ highlight/getGoHighlighted.go >/tmp/index.html
-```
