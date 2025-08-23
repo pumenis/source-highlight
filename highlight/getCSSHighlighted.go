@@ -16,14 +16,34 @@ import (
 	"github.com/smacker/go-tree-sitter/css"
 )
 
-func hexToRGB(hex string) (r, g, b int64) {
-	if hex[0] == '#' {
-		hex = hex[1:]
+func hexToRGB(hex string) (int64, int64, int64) {
+	hex = strings.TrimPrefix(hex, "#")
+
+	switch len(hex) {
+	case 3:
+		// Expand shorthand (e.g., "abc" → "aabbcc")
+		hex = fmt.Sprintf("%c%c%c%c%c%c", hex[0], hex[0], hex[1], hex[1], hex[2], hex[2])
+	case 6:
+		// Already full form
+	default:
+		// Invalid length, return black
+		return 0, 0, 0
 	}
-	r, _ = strconv.ParseInt(hex[0:2], 16, 64)
-	g, _ = strconv.ParseInt(hex[2:4], 16, 64)
-	b, _ = strconv.ParseInt(hex[4:6], 16, 64)
-	return
+
+	r, err := strconv.ParseInt(hex[0:2], 16, 64)
+	if err != nil {
+		r = 0
+	}
+	g, err := strconv.ParseInt(hex[2:4], 16, 64)
+	if err != nil {
+		g = 0
+	}
+	b, err := strconv.ParseInt(hex[4:6], 16, 64)
+	if err != nil {
+		b = 0
+	}
+
+	return r, g, b
 }
 
 func getContrastColor(hex string) string {
@@ -68,7 +88,7 @@ func populateCSSSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	}
 	htmlParts = append(htmlParts, fmt.Sprintf(
 		`<span id="h-%s" class="%s" type="%s" is_named="%s"%s>`,
-		id, class, node.Type(), isNamed, colorStyle))
+		id, class, strings.ReplaceAll(node.Type(), `"`, "&quot;"), isNamed, colorStyle))
 
 	if node.ChildCount() != 0 && node.StartByte() < node.Child(0).StartByte() {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))

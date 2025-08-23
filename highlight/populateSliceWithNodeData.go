@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html"
 	"regexp"
+	"strings"
 
 	sitter "github.com/smacker/go-tree-sitter"
 )
@@ -39,14 +40,23 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	// Start span with metadata and ID
 	htmlParts = append(htmlParts, fmt.Sprintf(
 		`<span id="h-%s" class="%s" type="%s" is_named="%s">`,
-		id, class, node.Type(), isNamed))
+		id, class, strings.ReplaceAll(node.Type(), `"`, "&quot;"), isNamed))
 
 	if node.ChildCount() != 0 && node.StartByte() < node.Child(0).StartByte() {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
 	}
 
 	if node.ChildCount() == 0 {
-		htmlParts = append(htmlParts, html.EscapeString(content))
+		if node.Type() == "raw_string_literal" {
+			if strings.HasPrefix(content, "`-- sql") {
+				htmlParts = append(htmlParts, GetSQLHighlighted(content))
+			}
+			if strings.HasPrefix(content, "`<") {
+				htmlParts = append(htmlParts, GetHTMLHighlighted(content))
+			}
+		} else {
+			htmlParts = append(htmlParts, html.EscapeString(content))
+		}
 	}
 
 	for i := uint32(0); i < node.ChildCount(); i++ {

@@ -1,0 +1,75 @@
+.highlighted {
+  background-color: #2d3f76;
+}
+
+:root {
+  background-color: #2b2e33;
+  color: #a5a8b3;
+  font-size: 1rem;
+}
+
+pre {
+  font-family: monospace;
+  overflow-y: auto;
+  background-color: #1a1d23;
+  tab-size: 4;
+}
+
+pre .comment {
+  color: #52555d;
+}
+
+pre .if,
+pre .then,
+pre .else,
+pre .elif,
+pre .fi,
+pre .case,
+pre .esac,
+pre .for,
+pre .select,
+pre .while,
+pre .until,
+pre .do,
+pre .done,
+pre .in,
+pre .function,
+pre .time,
+pre .coproc,
+pre .readonly,
+pre .declare,
+pre .local,
+pre .export,
+pre .return,
+pre .break,
+pre .continue,
+pre .shift,
+pre .eval,
+pre .exec,
+pre .exit,
+pre .trap,
+pre .set,
+pre .unset,
+pre .test {
+  color: #dd97f1;
+}
+
+pre .array .concatenation .word,
+pre .string_content,
+pre [type='"'] {
+  color: #87c05f;
+}
+
+pre .function_definition > .word,
+pre .command .command_name {
+  color: #5db4fa;
+}
+
+pre .number,
+pre .command > .word {
+  color: #dc8a37;
+}
+
+pre .special_variable_name {
+  color: #d3a225;
+}

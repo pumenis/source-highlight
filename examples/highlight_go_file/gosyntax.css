@@ -87,3 +87,448 @@ pre .selector_expression .field_identifier {
 pre .nil {
   color: #4ac2b8;
 }
+
+pre .keyword_limit,
+pre .keyword_offset,
+pre .keyword_add,
+pre .keyword_all,
+pre .keyword_allocate,
+pre .keyword_alter,
+pre .keyword_and,
+pre .keyword_any,
+pre .keyword_are,
+pre .keyword_array,
+pre .keyword_as,
+pre .keyword_asensitive,
+pre .keyword_assertion,
+pre .keyword_authorization,
+pre .keyword_avg,
+pre .keyword_backup,
+pre .keyword_begin,
+pre .keyword_between,
+pre .keyword_bigint,
+pre .keyword_binary,
+pre .keyword_blob,
+pre .keyword_boolean,
+pre .keyword_both,
+pre .keyword_by,
+pre .keyword_call,
+pre .keyword_cascade,
+pre .keyword_cascaded,
+pre .keyword_case,
+pre .keyword_cast,
+pre .keyword_char,
+pre .keyword_character,
+pre .keyword_check,
+pre .keyword_close,
+pre .keyword_coalesce,
+pre .keyword_collate,
+pre .keyword_column,
+pre .keyword_commit,
+pre .keyword_connect,
+pre .keyword_connection,
+pre .keyword_constraint,
+pre .keyword_contains,
+pre .keyword_containstable,
+pre .keyword_continue,
+pre .keyword_convert,
+pre .keyword_corresponding,
+pre .keyword_create,
+pre .keyword_cross,
+pre .keyword_cube,
+pre .keyword_current,
+pre .keyword_current_date,
+pre .keyword_current_time,
+pre .keyword_current_timestamp,
+pre .keyword_current_user,
+pre .keyword_cursor,
+pre .keyword_database,
+pre .keyword_date,
+pre .keyword_day,
+pre .keyword_deallocate,
+pre .keyword_dec,
+pre .keyword_decimal,
+pre .keyword_declare,
+pre .keyword_default,
+pre .keyword_deferrable,
+pre .keyword_deferred,
+pre .keyword_delete,
+pre .keyword_desc,
+pre .keyword_describe,
+pre .keyword_descriptor,
+pre .keyword_deterministic,
+pre .keyword_disconnect,
+pre .keyword_distinct,
+pre .keyword_double,
+pre .keyword_drop,
+pre .keyword_else,
+pre .keyword_end,
+pre .keyword_escape,
+pre .keyword_except,
+pre .keyword_exec,
+pre .keyword_execute,
+pre .keyword_exists,
+pre .keyword_external,
+pre .keyword_extract,
+pre .keyword_false,
+pre .keyword_fetch,
+pre .keyword_first,
+pre .keyword_float,
+pre .keyword_for,
+pre .keyword_foreign,
+pre .keyword_free,
+pre .keyword_from,
+pre .keyword_full,
+pre .keyword_function,
+pre .keyword_get,
+pre .keyword_global,
+pre .keyword_grant,
+pre .keyword_group,
+pre .keyword_grouping,
+pre .keyword_having,
+pre .keyword_hour,
+pre .keyword_identity,
+pre .keyword_if,
+pre .keyword_immediate,
+pre .keyword_in,
+pre .keyword_index,
+pre .keyword_indicator,
+pre .keyword_inner,
+pre .keyword_inout,
+pre .keyword_input,
+pre .keyword_insensitive,
+pre .keyword_insert,
+pre .keyword_int,
+pre .keyword_integer,
+pre .keyword_intersect,
+pre .keyword_interval,
+pre .keyword_into,
+pre .keyword_is,
+pre .keyword_isolation,
+pre .keyword_join,
+pre .keyword_key,
+pre .keyword_language,
+pre .keyword_large,
+pre .keyword_last,
+pre .keyword_lateral,
+pre .keyword_leading,
+pre .keyword_left,
+pre .keyword_level,
+pre .keyword_like,
+pre .keyword_local,
+pre .keyword_localtime,
+pre .keyword_localtimestamp,
+pre .keyword_match,
+pre .keyword_max,
+pre .keyword_min,
+pre .keyword_minute,
+pre .keyword_module,
+pre .keyword_month,
+pre .keyword_names,
+pre .keyword_national,
+pre .keyword_natural,
+pre .keyword_nchar,
+pre .keyword_next,
+pre .keyword_no,
+pre .keyword_none,
+pre .keyword_not,
+pre .keyword_null,
+pre .keyword_nullif,
+pre .keyword_numeric,
+pre .keyword_of,
+pre .keyword_off,
+pre .keyword_offsets,
+pre .keyword_on,
+pre .keyword_only,
+pre .keyword_open,
+pre .keyword_option,
+pre .keyword_or,
+pre .keyword_order,
+pre .keyword_outer,
+pre .keyword_output,
+pre .keyword_over,
+pre .keyword_overlaps,
+pre .keyword_pad,
+pre .keyword_partial,
+pre .keyword_partition,
+pre .keyword_percent,
+pre .keyword_plan,
+pre .keyword_position,
+pre .keyword_precision,
+pre .keyword_prepare,
+pre .keyword_preserve,
+pre .keyword_primary,
+pre .keyword_prior,
+pre .keyword_privileges,
+pre .keyword_procedure,
+pre .keyword_public,
+pre .keyword_raiseerror,
+pre .keyword_read,
+pre .keyword_readtext,
+pre .keyword_real,
+pre .keyword_references,
+pre .keyword_relative,
+pre .keyword_restrict,
+pre .keyword_return,
+pre .keyword_returns,
+pre .keyword_revoke,
+pre .keyword_right,
+pre .keyword_rollback,
+pre .keyword_rollup,
+pre .keyword_rows,
+pre .keyword_savepoint,
+pre .keyword_schema,
+pre .keyword_scroll,
+pre .keyword_second,
+pre .keyword_section,
+pre .keyword_select,
+pre .keyword_session,
+pre .keyword_session_user,
+pre .keyword_set,
+pre .keyword_setuser,
+pre .keyword_share,
+pre .keyword_shutdown,
+pre .keyword_smallint,
+pre .keyword_some,
+pre .keyword_space,
+pre .keyword_specific,
+pre .keyword_specifictype,
+pre .keyword_sql,
+pre .keyword_sqlexception,
+pre .keyword_sqlstate,
+pre .keyword_sqlwarning,
+pre .keyword_start,
+pre .keyword_statistics,
+pre .keyword_structure,
+pre .keyword_substring,
+pre .keyword_sum,
+pre .keyword_symmetric,
+pre .keyword_system_user,
+pre .keyword_table,
+pre .keyword_temp,
+pre .keyword_temporary,
+pre .keyword_then,
+pre .keyword_time,
+pre .keyword_timestamp,
+pre .keyword_timezone_hour,
+pre .keyword_timezone_minute,
+pre .keyword_to,
+pre .keyword_top,
+pre .keyword_trailing,
+pre .keyword_transaction,
+pre .keyword_translate,
+pre .keyword_translation,
+pre .keyword_trigger,
+pre .keyword_true,
+pre .keyword_truncate,
+pre .keyword_under,
+pre .keyword_union,
+pre .keyword_unique,
+pre .keyword_unknown,
+pre .keyword_update,
+pre .keyword_updatetext,
+pre .keyword_usage,
+pre .keyword_user,
+pre .keyword_using,
+pre .keyword_values,
+pre .keyword_varying,
+pre .keyword_view,
+pre .keyword_waitfor,
+pre .keyword_when,
+pre .keyword_where,
+pre .keyword_while,
+pre .keyword_with,
+pre .keyword_writetext {
+  color: #dd97f1;
+}
+
+pre .keyword_true,
+pre .keyword_false,
+pre .keyword_unknown,
+pre .keyword_null,
+pre .keyword_nullif,
+pre .keyword_desc,
+pre .keyword_asc,
+pre .keyword_interval,
+pre .keyword_date,
+pre .keyword_time,
+pre .keyword_timestamp,
+pre .keyword_current_date,
+pre .keyword_current_time,
+pre .keyword_current_timestamp,
+pre .keyword_localtime,
+pre .keyword_localtimestamp,
+pre .keyword_extract,
+pre .keyword_timezone_hour,
+pre .keyword_timezone_minute {
+  color: #d0a025;
+}
+
+pre .object_reference .identifier {
+  color: #5cb3f9;
+}
+
+pre .field > .identifier {
+  color: #ff838b;
+}
+
+pre .raw_string_literal .document .literal {
+  color: #7aad57;
+}
+
+pre .raw_string_literal .document .doctype > [type=">"],
+pre .raw_string_literal .document .doctype {
+  color: #ff966c;
+}
+
+pre .raw_string_literal .document .tag_name {
+  color: #c099ff;
+}
+
+pre .raw_string_literal .document .attribute_name {
+  color: #4fd6be;
+}
+
+pre .raw_string_literal .document .quoted_attribute_value :not(.program *),
+pre .raw_string_literal .document .quoted_attribute_value:not(:has(.program)) {
+  color: #c3e88d;
+}
+
+pre .raw_string_literal .document .program {
+  color: #86e1fc;
+}
+
+pre .raw_string_literal .document .let,
+pre .raw_string_literal .document .const,
+pre .raw_string_literal .document .var,
+pre .raw_string_literal .document .return {
+  color: #fca7ea;
+}
+
+pre .raw_string_literal .document .text,
+pre .raw_string_literal .document .identifier,
+pre .raw_string_literal .document .member_expression > .identifier,
+pre .raw_string_literal .document .variable_declarator > .identifier {
+  color: #c8d3f5;
+}
+
+pre .raw_string_literal .document .template_substitution [type="${"],
+pre .raw_string_literal .document .template_substitution [type="}"],
+pre .raw_string_literal .document [type="=>"],
+pre .raw_string_literal .document [type="&&"],
+pre .raw_string_literal .document [type="||"],
+pre .raw_string_literal .document [type="<"],
+pre .raw_string_literal .document [type=">"],
+pre .raw_string_literal .document [type="</"],
+pre .raw_string_literal .document [type="/>"],
+pre .raw_string_literal .document [type="+"],
+pre .raw_string_literal .document [type="-"],
+pre .raw_string_literal .document [type="*"],
+pre .raw_string_literal .document [type="/"],
+pre .raw_string_literal .document [type="!"],
+pre .raw_string_literal .document [type="?"],
+pre .raw_string_literal .document [type="."],
+pre .raw_string_literal .document [type="="] {
+  color: #89ddff;
+}
+
+pre .raw_string_literal .document [type="("],
+pre .raw_string_literal .document [type=")"],
+pre .raw_string_literal .document [type="{"],
+pre .raw_string_literal .document [type="}"],
+pre .raw_string_literal .document [type="["],
+pre .raw_string_literal .document [type="]"] {
+  color: #7882b7;
+}
+
+pre .raw_string_literal .document .string_fragment,
+pre .raw_string_literal .document .string {
+  color: #bfe38a;
+}
+
+pre .raw_string_literal .document .number,
+pre .raw_string_literal .document .true,
+pre .raw_string_literal .document .false {
+  color: #ff966c;
+}
+
+pre .raw_string_literal .document .function_declaration > .identifier,
+pre
+  .raw_string_literal
+  .document
+  .call_expression
+  > .member_expression
+  > :last-child,
+pre .raw_string_literal .document .call_expression > .identifier,
+pre
+  .raw_string_literal
+  .document
+  .CallExpression
+  .MemberExpression:has(+ [label="("])
+  :last-child {
+  color: #82aaff;
+}
+
+pre
+  .raw_string_literal
+  .document
+  .MemberExpression:has(+ [label="["])
+  :last-child
+  :first-child,
+pre
+  .raw_string_literal
+  .document
+  .call_expre
+  .raw_string_literal
+  .documentssion
+  > .member_expre
+  .raw_string_literal
+  .documentssion
+  > .property_identifier:not(:last-child),
+pre .raw_string_literal .document .property_identifier {
+  color: #4fd6be;
+}
+
+pre .raw_string_literal .document .if,
+pre .raw_string_literal .document .for,
+pre .raw_string_literal .document .do,
+pre .raw_string_literal .document .while,
+pre .raw_string_literal .document .switch,
+pre .raw_string_literal .document .function {
+  color: #c099ff;
+}
+pre .raw_string_literal .document .import,
+pre .raw_string_literal .document .from,
+pre .raw_string_literal .document .new {
+  color: #86e1fc;
+}
+
+pre .raw_string_literal .document .import_clause .identifier {
+  color: #65bcff;
+}
+
+pre .raw_string_literal .document .formal_parameters .identifier {
+  color: #f18f68;
+}
+
+pre .raw_string_literal .stylesheet .property_name,
+pre .raw_string_literal .stylesheet .class_name {
+  color: #f5983a;
+}
+
+pre .raw_string_literal .stylesheet .id_name,
+pre .raw_string_literal .stylesheet .pseudo_class_selector .class_name {
+  color: #dfab25;
+}
+
+pre .raw_string_literal .stylesheet .tag_name {
+  color: #ff838b;
+}
+
+pre .raw_string_literal .stylesheet .integer_value {
+  color: #49bdb3;
+}
+
+pre .raw_string_literal .stylesheet .integer_value .unit {
+  color: #81b75b;
+}

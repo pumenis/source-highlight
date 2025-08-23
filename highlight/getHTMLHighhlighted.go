@@ -46,7 +46,7 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 
 	htmlParts = append(htmlParts, fmt.Sprintf(
 		`<span id="h-%s" class="%s" type="%s" is_named="%s">`,
-		id, class, node.Type(), isNamed))
+		id, class, strings.ReplaceAll(node.Type(), `"`, "&quot;"), isNamed))
 
 	if node.ChildCount() > 0 && node.StartByte() < node.Child(0).StartByte() {
 		htmlParts = append(htmlParts, html.EscapeString(string(code[node.StartByte():node.Child(0).StartByte()])))
@@ -58,6 +58,8 @@ func populateHTMLSliceWithNodeData(node *sitter.Node, code []byte) []string {
 				node.Parent() != nil && node.Parent().Parent() != nil &&
 				matchScriptAttributes.MatchString(node.Parent().Parent().Child(0).Content(code))) {
 			htmlParts = append(htmlParts, GetJSHighlighted(text))
+		} else if node.Type() == "raw_text" && node.Parent() != nil && node.Parent().Type() == "style_element" {
+			htmlParts = append(htmlParts, GetCSSHighlighted(text))
 		} else {
 			htmlParts = append(htmlParts, html.EscapeString(text))
 		}

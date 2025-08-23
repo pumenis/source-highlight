@@ -10,6 +10,18 @@
     <p style="font-size: 5rem">Hello guys</p>
   </body>
   <script>
+    const c = "smash";
     console.log("hello everyone");
+    console.log(`-- sql
+      SELECT a from b
+      WHERE c = '${c}';
+    `);
+    console.log('
+      SELECT "hello everyone";
+      ')
+    console.log("
+      SELECT a from b
+      WHERE c = a;
+    ")
   </script>
 </html>
