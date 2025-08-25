@@ -47,11 +47,11 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	}
 
 	if node.ChildCount() == 0 {
-		if node.Type() == "raw_string_literal" {
-			if strings.HasPrefix(content, "`-- sql") {
+		if node.Type() == "raw_string_literal" || node.Type() == "string_content" {
+			if strings.HasPrefix(content, "`-- sql") || strings.HasPrefix(node.Parent().Child(1).Content(code), "-- sql") {
 				htmlParts = append(htmlParts, GetSQLHighlighted(content))
 			}
-			if strings.HasPrefix(content, "`<") {
+			if strings.HasPrefix(content, "`<") || strings.HasPrefix(node.Parent().Child(1).Content(code), "<") {
 				htmlParts = append(htmlParts, GetHTMLHighlighted(content))
 			}
 		} else {
