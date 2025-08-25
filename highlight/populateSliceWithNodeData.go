@@ -47,11 +47,11 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	}
 
 	if node.ChildCount() == 0 {
-		if node.Type() == "raw_string_literal" || node.Type() == "string_content" {
-			if strings.HasPrefix(content, "`-- sql") || strings.HasPrefix(node.Parent().Child(1).Content(code), "-- sql") {
+		if node.Type() == "raw_string_literal" {
+			if strings.HasPrefix(content, "`-- sql") {
 				htmlParts = append(htmlParts, GetSQLHighlighted(content))
 			}
-			if strings.HasPrefix(content, "`<") || strings.HasPrefix(node.Parent().Child(1).Content(code), "<") {
+			if strings.HasPrefix(content, "`<") {
 				htmlParts = append(htmlParts, GetHTMLHighlighted(content))
 			}
 		} else {
@@ -59,12 +59,19 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 		}
 	}
 
-	for i := uint32(0); i < node.ChildCount(); i++ {
-		intI := int(i)
-		if node.ChildCount() > 1 && i > 0 && node.Child(intI).StartByte() > node.Child(intI-1).EndByte() {
-			htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(intI-1).EndByte():node.Child(intI).StartByte()])))
+	if node.Type() == "string" && strings.HasPrefix(content, `"--sql`) {
+		fmt.Println(content)
+		htmlParts = append(htmlParts, `<span id="h-8a331fdde703" class="syntax_node" type="&quot;" is_named="false">"</span>`)
+		htmlParts = append(htmlParts, GetSQLHighlighted(content))
+		htmlParts = append(htmlParts, `<span id="h-8a331fdde703" class="syntax_node" type="&quot;" is_named="false">"</span>`)
+	} else {
+		for i := uint32(0); i < node.ChildCount(); i++ {
+			intI := int(i)
+			if node.ChildCount() > 1 && i > 0 && node.Child(intI).StartByte() > node.Child(intI-1).EndByte() {
+				htmlParts = append(htmlParts, html.EscapeString(string(code[node.Child(intI-1).EndByte():node.Child(intI).StartByte()])))
+			}
+			htmlParts = append(htmlParts, populateSliceWithNodeData(node.Child(intI), code)...)
 		}
-		htmlParts = append(htmlParts, populateSliceWithNodeData(node.Child(intI), code)...)
 	}
 
 	if node.ChildCount() != 0 && node.EndByte() > node.Child(int(node.ChildCount()-1)).EndByte() {
