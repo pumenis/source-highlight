@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"html"
-	"os"
 	"regexp"
 	"strings"
 
@@ -61,9 +60,8 @@ func populateSliceWithNodeData(node *sitter.Node, code []byte) []string {
 	}
 
 	if node.Type() == "string" && strings.HasPrefix(content, `"-- sql`) {
-		fmt.Fprintln(os.Stderr, content)
 		htmlParts = append(htmlParts, `<span id="h-8a331fdde703" class="syntax_node" type="&quot;" is_named="false">"</span>`)
-		htmlParts = append(htmlParts, GetSQLHighlighted(content))
+		htmlParts = append(htmlParts, GetSQLHighlighted(content[1:len(content)-1]))
 		htmlParts = append(htmlParts, `<span id="h-8a331fdde703" class="syntax_node" type="&quot;" is_named="false">"</span>`)
 	} else {
 		for i := uint32(0); i < node.ChildCount(); i++ {
